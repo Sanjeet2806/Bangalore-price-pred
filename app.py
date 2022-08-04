@@ -92,8 +92,8 @@ def predict_home_price():
 def show_resources():
 
     response = jsonify({
-        'modelValue': __model
-        'locationsValue': __locations
+        'modelValue': __model,
+        'locationsValue': __locations,
         'dataclmValue': __data_columns
     })
     response.headers.add('Access-Control-Allow-Origin', '*')
