@@ -8,9 +8,9 @@ __data_columns = None
 __model = None
 
 app = Flask(__name__)
-__model = pickle.load(open('banglore_home_prices_model.pkl', 'rb'))
 __data_columns = json.load(open("columns.json", "r"))['data_columns']
 __locations = __data_columns[3:]
+__model = pickle.load(open('banglore_home_prices_model.pickle', 'rb'))
 
 #getting estimated price from the loaded model
 def get_estimated_price(location,sqft,bhk,bath):
