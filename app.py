@@ -7,6 +7,11 @@ __locations = None
 __data_columns = None
 __model = None
 
+app = Flask(__name__)
+__model = pickle.load(open('banglore_home_prices_model.pkl', 'rb'))
+__data_columns = json.load(open("columns.json", "r"))['data_columns']
+__locations = __data_columns[3:]
+
 #getting estimated price from the loaded model
 def get_estimated_price(location,sqft,bhk,bath):
     global __data_columns
@@ -25,29 +30,27 @@ def get_estimated_price(location,sqft,bhk,bath):
 
     return round(__model.predict([x])[0],2) #predicts the result and rounds it upto 2 decimal places
 
-def load_saved_artifacts():
-    #function to load artifacts(the model and the column list) to be called from the server
-    print("loading saved artifacts...start")
-    #reference to global variables
-    global  __data_columns
-    global __locations
+# def load_saved_artifacts():
+#     #function to load artifacts(the model and the column list) to be called from the server
+#     print("loading saved artifacts...start")
+#     #reference to global variables
+#     global  __data_columns
+#     global __locations
 
-    with open("./columns.json", "r") as f: #opening the json file
-        __data_columns = json.load(f)['data_columns'] #loading json file contents into a dictionary object
-        __locations = __data_columns[3:]  # first 3 columns of this dictionary are sqft, bath, bhk, so the rest corresponds to the location list which we have stored here
-    print("Loading the columns")
-    print(__locations)
+#     with open("./columns.json", "r") as f: #opening the json file
+#         __data_columns = json.load(f)['data_columns'] #loading json file contents into a dictionary object
+#         __locations = __data_columns[3:]  # first 3 columns of this dictionary are sqft, bath, bhk, so the rest corresponds to the location list which we have stored here
+#     print("Loading the columns")
+#     print(__locations)
 
-    global __model #reference to global model variable
-    if __model is None:
-        with open('./banglore_home_prices_model.pickle', 'rb') as f: #rb for loading binary file and storing in __model
-            __model = pickle.load(f)
-    print("Model loading done")
+#     global __model #reference to global model variable
+#     if __model is None:
+#         with open('./banglore_home_prices_model.pickle', 'rb') as f: #rb for loading binary file and storing in __model
+#             __model = pickle.load(f)
+#     print("Model loading done")
 
-    print("loading saved artifacts...done")  #done loading both artifacts
+#     print("loading saved artifacts...done")  #done loading both artifacts
 
-#initialising the app
-app = Flask(__name__)
 
 #home page will show template for prediction
 @app.route('/', methods=['GET', 'POST'])
@@ -102,7 +105,7 @@ def show_resources():
 
 if __name__ == "__main__":
     print("Starting Python Flask Server For Home Price Prediction...")
-    load_saved_artifacts() #loading artifacts on server startup
+#     load_saved_artifacts() #loading artifacts on server startup
     app.run() #then running this app (server)
     
     
