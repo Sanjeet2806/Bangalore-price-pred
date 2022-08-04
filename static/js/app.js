@@ -30,7 +30,7 @@ function getBathValue() {
     var location = document.getElementById("uiLocations");
     var estPrice = document.getElementById("uiEstimatedPrice");
   
-    var url = "http://https://bangalore-property-prediction.herokuapp.com//predict_home_price"; //posting to server endpoint which will estimate the price for us
+    var url = "https://bangalore-property-prediction.herokuapp.com/predict_home_price"; //posting to server endpoint which will estimate the price for us
     // var url = "/api/predict_home_price"; // Use this if  you are using nginx. i.e tutorial 8 and onwards
     //var url = "http://"
   
@@ -48,7 +48,7 @@ function getBathValue() {
   
   function onPageLoad() {
     console.log( "document loaded" );
-    var url = "http://https://bangalore-property-prediction.herokuapp.com//get_location_names"; //fetching the location data from server endpoint which supplies us with the location names on requesting it
+    var url = "https://bangalore-property-prediction.herokuapp.com/get_location_names"; //fetching the location data from server endpoint which supplies us with the location names on requesting it
     // var url = "/api/get_location_names"; // Use this if  you are using nginx. i.e tutorial 8 and onwards
     $.get(url,function(data, status) {
         console.log("got response for get_location_names request");
