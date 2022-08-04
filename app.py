@@ -55,9 +55,16 @@ def home():
 #endpoint which can be requested to fetch all the location names whenever required in a json format and return it as response
 @app.route('/get_location_names', methods=['GET'])
 def get_location_names():
-    response = jsonify({
+    #testing our __locations
+    if __locations == None:
+        response = jsonify({
+        'locations': 'ASHENI LOCATIONS BHAI'
+        })
+    else:
+        response = jsonify({
         'locations': __locations
-    })
+        })
+       
     response.headers.add('Access-Control-Allow-Origin', '*')
 
     return response
