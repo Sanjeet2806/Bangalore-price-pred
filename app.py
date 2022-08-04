@@ -32,7 +32,7 @@ def load_saved_artifacts():
     global  __data_columns
     global __locations
 
-    with open("columns.json", "r") as f: #opening the json file
+    with open("./columns.json", "r") as f: #opening the json file
         __data_columns = json.load(f)['data_columns'] #loading json file contents into a dictionary object
         __locations = __data_columns[3:]  # first 3 columns of this dictionary are sqft, bath, bhk, so the rest corresponds to the location list which we have stored here
     print("Loading the columns")
@@ -40,7 +40,7 @@ def load_saved_artifacts():
 
     global __model #reference to global model variable
     if __model is None:
-        with open('banglore_home_prices_model.pickle', 'rb') as f: #rb for loading binary file and storing in __model
+        with open('./banglore_home_prices_model.pickle', 'rb') as f: #rb for loading binary file and storing in __model
             __model = pickle.load(f)
     print("Model loading done")
 
