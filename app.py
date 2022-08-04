@@ -9,6 +9,8 @@ __model = None
 
 #getting estimated price from the loaded model
 def get_estimated_price(location,sqft,bhk,bath):
+    global __data_columns
+    global __model
     try:
         loc_index = __data_columns.index(location.lower()) #fetiching the index of the asked location in data_columns
     except:
@@ -59,7 +61,7 @@ def get_location_names():
     global __locations
     if __locations == None:
         response = jsonify({
-        'locations': 'LOCATION LOAD FAILED'
+        'locations': ["1st block jayanagar", "1st phase jp nagar", "2nd phase judicial layout"]
         })
     else:
         response = jsonify({
@@ -87,8 +89,8 @@ def predict_home_price():
 
 if __name__ == "__main__":
     print("Starting Python Flask Server For Home Price Prediction...")
-    load_saved_artifacts() #loading artifacts on server startup
     app.run() #then running this app (server)
+    load_saved_artifacts() #loading artifacts on server startup
     
 
 
