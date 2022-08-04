@@ -56,9 +56,10 @@ def home():
 @app.route('/get_location_names', methods=['GET'])
 def get_location_names():
     #testing our __locations
+    global __locations
     if __locations == None:
         response = jsonify({
-        'locations': 'ASHENI LOCATIONS BHAI'
+        'locations': 'LOCATION LOAD FAILED'
         })
     else:
         response = jsonify({
@@ -86,7 +87,8 @@ def predict_home_price():
 
 if __name__ == "__main__":
     print("Starting Python Flask Server For Home Price Prediction...")
-    app.run() #then running this app (server)
     load_saved_artifacts() #loading artifacts on server startup
+    app.run() #then running this app (server)
+    
 
 
