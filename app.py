@@ -87,6 +87,19 @@ def predict_home_price():
 
     return response
 
+#endpoint to test loading of resources
+@app.route('/show_resources', methods=['GET', 'POST'])
+def show_resources():
+
+    response = jsonify({
+        'modelValue': __model
+        'locationsValue': __locations
+        'dataclmValue': __data_columns
+    })
+    response.headers.add('Access-Control-Allow-Origin', '*')
+
+    return response
+
 if __name__ == "__main__":
     print("Starting Python Flask Server For Home Price Prediction...")
     load_saved_artifacts() #loading artifacts on server startup
